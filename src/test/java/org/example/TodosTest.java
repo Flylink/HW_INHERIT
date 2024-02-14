@@ -85,4 +85,53 @@ public class TodosTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
+    @Test
+    public void testSearchMultipleTasksMatch() {
+        Todos todos = new Todos();
+        Task task1 = new SimpleTask(1, "Task 1");
+        Task task2 = new SimpleTask(2, "Task 2");
+        Task task3 = new SimpleTask(3, "Task 3");
+        todos.add(task1);
+        todos.add(task2);
+        todos.add(task3);
+
+        Task[] result = todos.search("Task");
+
+        Assertions.assertEquals(3, result.length);
+        Assertions.assertTrue(result[0].getId() == 1);
+        Assertions.assertTrue(result[1].getId() == 2);
+        Assertions.assertTrue(result[2].getId() == 3);
+    }
+
+    @Test
+    public void testSearchOneTaskMatches() {
+        Todos todos = new Todos();
+        Task task1 = new SimpleTask(1, "Task 1");
+        Task task2 = new SimpleTask(2, "Task 2");
+        Task task3 = new SimpleTask(3, "Task 3");
+        todos.add(task1);
+        todos.add(task2);
+        todos.add(task3);
+
+        Task[] result = todos.search("Task 2");
+
+        Assertions.assertEquals(1, result.length);
+        Assertions.assertTrue(result[0].getId() == 2);
+    }
+
+    @Test
+    public void testSearchNoTasksMatch() {
+        Todos todos = new Todos();
+        Task task1 = new SimpleTask(1, "Task 1");
+        Task task2 = new SimpleTask(2, "Task 2");
+        Task task3 = new SimpleTask(3, "Task 3");
+        todos.add(task1);
+        todos.add(task2);
+        todos.add(task3);
+
+        Task[] result = todos.search("Task 4");
+
+        Assertions.assertEquals(0, result.length);
+    }
 }
+
