@@ -95,12 +95,10 @@ public class TodosTest {
         todos.add(task2);
         todos.add(task3);
 
-        Task[] result = todos.search("Task");
+        Task[] expected = new Task[]{task1, task2, task3};
+        Task[] actual = todos.search("Task");
+        Assertions.assertArrayEquals(expected, actual);
 
-        Assertions.assertEquals(3, result.length);
-        Assertions.assertTrue(result[0].getId() == 1);
-        Assertions.assertTrue(result[1].getId() == 2);
-        Assertions.assertTrue(result[2].getId() == 3);
     }
 
     @Test
@@ -113,10 +111,10 @@ public class TodosTest {
         todos.add(task2);
         todos.add(task3);
 
-        Task[] result = todos.search("Task 2");
+        Task[] expected = new Task[]{task2};
+        Task[] actual = todos.search("Task 2");
 
-        Assertions.assertEquals(1, result.length);
-        Assertions.assertTrue(result[0].getId() == 2);
+        Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
@@ -129,9 +127,10 @@ public class TodosTest {
         todos.add(task2);
         todos.add(task3);
 
-        Task[] result = todos.search("Task 4");
+        Task[] expected = new Task[]{};
+        Task[] actual = todos.search("Task 4");
 
-        Assertions.assertEquals(0, result.length);
+        Assertions.assertArrayEquals(expected, actual);
     }
 }
 
